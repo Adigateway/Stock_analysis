@@ -3,6 +3,9 @@ from preprocess import preprocess_data
 from sequences import create_sequences
 from tensorflow.keras.models import load_model
 import numpy as np
+from datetime import datetime
+
+
 
 def main():
     try:
@@ -18,6 +21,11 @@ def main():
         # 3. Use the LAST sequence for prediction (most recent data)
         X_test = X[-1:]  # Takes the most recent sequence
         print(f"Test data shape: {X_test.shape}")
+        print("Columns in prediction data:", data.columns.tolist())  # Should match training
+        print("Data shape:", data.shape)  # Should be (days, features)
+    
+        X, y, scaler = create_sequences(data)
+        print("X shape:", X.shape)  # Should be (1, 30, 7) for 7 features
         
         # 4. Make prediction
         print("Making prediction...")
@@ -29,6 +37,7 @@ def main():
                 y_pred.reshape(-1, 1),
                 np.zeros((len(y_pred), data.shape[1] - 1))
             ], axis=1))[:, 0]
+
         
         print(f"\nNext day predicted price: {y_pred_actual[0]:.2f}")
         
