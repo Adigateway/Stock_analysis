@@ -6,6 +6,8 @@ import pandas as pd
 import numpy as np
 import sys
 
+
+
 def validate_data(X, y):
     """Ensure data meets requirements before training"""
     checks = {
@@ -57,7 +59,7 @@ def main():
         history = model.fit(
             X_train, y_train,
             validation_data=(X_test, y_test),
-            epochs=50,
+            epochs=70,
             batch_size=32,
             verbose=1
         )
