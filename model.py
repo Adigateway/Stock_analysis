@@ -10,5 +10,5 @@ def build_model(input_shape):
     
     model = Model(inputs=inputs, outputs=outputs)
     model.compile(optimizer='adam', 
-                 loss='mean_squared_error')  # Using string reference
+                 loss=MeanSquaredError())  # Using string reference
     return model
